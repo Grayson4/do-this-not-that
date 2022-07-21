@@ -4,6 +4,7 @@ float Buttonx2, Buttony2, ButtonWidth2, Buttonheight2;
 float rectDisplayx2,rectDisplayy2, rectDisplayWidth2, rectDisplayheight2;
 float ellipseDisplayX, ellipseDisplayY, ellipseDisplayXdiamiter, ellipseDisplayYdiamiter;
 color black=#000000;
+Boolean rectON=false, ellipseON=false;
 //
 void setup() {
   //Display Geometry
@@ -33,7 +34,7 @@ void setup() {
   //population using appWIdth and appHeight
   int centerX = appWidth*1/2;
   int centerY = appHeight*1/2;
-  Buttonx1 = centerX - appWidth*1/14;
+  Buttonx1 = centerX - appWidth*1/4;
   Buttony1  = centerY + appHeight*1/4;
   ButtonWidth1 = appWidth*1/4;
   Buttonheight1 = appHeight*1/4;
@@ -41,28 +42,33 @@ void setup() {
   Buttony2 = Buttony1;
   ButtonWidth2 = ButtonWidth1;
   Buttonheight2 = ButtonWidth1;
-  rectDisplayx2 = Buttonx1;
+  rectDisplayx2 = centerX - appWidth*1/4;
   rectDisplayy2 = centerY - appHeight*1/4;
-  rectDisplayWidth2 = ;
-  rectDisplayheight2 = ;
-  ellipseDisplayX = ;
-  ellipseDisplayY = ;
-  ellipseDisplayXdiamiter = ;
-  ellipseDisplayYdiamiter = ;
+  rectDisplayWidth2 = ButtonWidth1;
+  rectDisplayheight2 = Buttonheight1;
+  ellipseDisplayX = Buttonx2;
+  ellipseDisplayY = rectDisplayy2;
+  ellipseDisplayXdiamiter = appWidth*1/5;
+  ellipseDisplayYdiamiter = appHeight*1/5;
 }//End setup
 //
 void draw() {
   background(black);
   rect(Buttonx1, Buttony1, ButtonWidth1, Buttonheight1);
   rect(Buttonx2, Buttony2, ButtonWidth2, Buttonheight2);
-  rect(rectDisplayx2,rectDisplayy2, rectDisplayWidth2, rectDisplayheight2); //Button 1
-  ellipse(ellipseDisplayX, ellipseDisplayY, ellipseDisplayXdiamiter, ellipseDisplayYdiamiter); //Button 2
+  if ( rectON==true ) rect(rectDisplayx2,rectDisplayy2, rectDisplayWidth2, rectDisplayheight2); //Button 1
+  if ( ellipseON==true ) ellipse(ellipseDisplayX, ellipseDisplayY, ellipseDisplayXdiamiter, ellipseDisplayYdiamiter); //Button 2
   //
   //text for Buttons
 }//End draw
 //
 void keyPressed() {}//End keyPressed
 //
-void mousePressed() {}//End mousePressed
+void mousePressed() {
+  rectON=false;
+  ellipseON=false;
+  if ( mouseX>=Buttonx1 && mouseX<=Buttonx1+ButtonWidth1 && mouseY>=Buttony1 && mouseY<=Buttony1+Buttonheight1 ) rectON=true;
+  if ( mouseX>=Buttonx2 && mouseX<=Buttonx2+ButtonWidth2 && mouseY>=Buttony2 && mouseY<=Buttony2+Buttonheight2 ) ellipseON=true;
+}//End mousePressed
 //
 //End Main Program
